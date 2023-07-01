@@ -15,17 +15,15 @@ class ExpresswayAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->is('users') && (auth()->user()->role !== 'Admin' && auth()->user()->role !== 'Owner')){
+        if($request->is('users') && (auth()->user()->role !== 'Admin' && auth()->user()->role !== 'Owner' && auth()->user()->role !== 'Manager')){
             return redirect('/');
         }elseif($request->is('user/*') && (auth()->user()->role !== 'Admin' && auth()->user()->role !== 'Owner')){
                 return redirect('/');
-        }elseif($request->is('reports') && auth()->user()->role !== 'Manager'){
+        }elseif($request->is('buses') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner' && auth()->user()->role !== 'Manager')){
             return redirect('/');
-        }elseif($request->is('buses') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner')){
+        }elseif($request->is('routes') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner'  && auth()->user()->role !== 'Manager')){
             return redirect('/');
-        }elseif($request->is('routes') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner')){
-            return redirect('/');
-        }elseif($request->is('trips') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner')){
+        }elseif($request->is('trips') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner'  && auth()->user()->role !== 'Manager')){
             return redirect('/');
         }
         return $next($request);

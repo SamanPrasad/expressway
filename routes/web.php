@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Expressway\BusController;
-use App\Http\Controllers\Expressway\ReportController;
+use App\Http\Controllers\Expressway\RouteController;
 use App\Http\Controllers\Expressway\UserController;
 use App\Http\Controllers\HomeController;
 use App\Models\Post;
@@ -42,23 +42,20 @@ Route::get('/manager', function(){
     return view('home');
 });
 
+/***********User routes************/
 Route::get('/users', [UserController::class, 'index'])->middleware('expresswayauth');
 
 Route::post('/user', [UserController::class, 'create']);
 
 Route::get('/user', [UserController::class, 'singleUser']);
 
+Route::post('/user/update', [UserController::class, 'update']);
+
 Route::delete('/user/{id}', [UserController::class, 'destroy']);
-
-
-Route::get('/reports', [ReportController::class, 'index'])->middleware('expresswayauth');
+/************************/
 
 Route::get('/buses', [BusController::class, 'index'])->middleware('expresswayauth');
 
-Route::get('/routes', [ReportController::class, 'index'])->middleware('expresswayauth');
+Route::get('/routes', [RouteController::class, 'index'])->middleware('expresswayauth');
 
-Route::get('/details', function(){
-    $posts = Post::paginate(5, ['*'], 'post');
-    // dd($posts);
-    return view('test')->with('posts', $posts);
-});
+

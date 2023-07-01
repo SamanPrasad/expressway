@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Expressway;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class UserController extends Controller
 
     private $roles = ['Admin', 'Manager', 'Data Entry', 'Owner', 'Driver', 'Conductor'];
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -40,6 +41,11 @@ class UserController extends Controller
             'user'=>$user,
             'roles'=>$this->roles
         ];
+    }
+
+    //Update user
+    public function update(Request $request){
+        return $this->userRepository->update($request);
     }
 
     //delete user

@@ -45,11 +45,13 @@ class UserSeeder extends Seeder
             [
                 'first_name'=>'Steve',
                 'last_name'=>'Rogers',
+                'email'=>'steve@gmail.com',
                 'role'=>'Driver'
             ],
             [
                 'first_name'=>'Tony',
                 'last_name'=>'Stark',
+                'email'=>'stark@gmail.com',
                 'role'=>'Conductor'
             ],
         ];

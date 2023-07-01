@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\User;
 
 use App\Models\User;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class UserRepository{
+class UserRepository implements UserRepositoryInterface{
 
     //get all users
     public function all(){
@@ -27,13 +28,40 @@ class UserRepository{
         return User::create($details);
     }
 
+    //Update user
+    public function update(Request $request){
+        $user  = User::find($request->user_id);
+        if(is_null($user)){
+            return 'error';
+        }
+
+        $validator = $this->ajaxVlidation($request);
+        $msg_count = count($validator->messages());
+
+        if($msg_count > 1){
+            return $validator->messages();
+        }
+
+        $user->first_name = $request->fname;
+        $user->last_name = $request->lname;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $result = $user->save();
+
+        if($result){
+            return 'success';
+        }
+
+        return 'error';
+    }
+
     //Basic validation of inputs
     private function validate(Request $request){
         $rules = [
             'role'=>'required',
             'fname'=>'required|alpha|max:255',
             'lname'=>'required|alpha|max:255',
-            'email'=>'required_if:role,==,Manager|required_if:role,==,Admin|required_if:role,==,Data Entry|required_if:role,==,Owner|email|unique:users,email',
+            'email'=>'required|email:filter|unique:users,email,'.$request->user_id.',user_id',
             'password'=>'required_if:role,==,Manager|required_if:role,==,Admin|required_if:role,==,Data Entry|required_if:role,==,Owner|min:5',
         ];
 
@@ -45,10 +73,10 @@ class UserRepository{
             'lname.required'=> 'Last Name field cannot be empty!',
             'lname.alpha'=> 'Last Name field must only contain letters!',
             'lname.max'=> 'Last Name field cannot contain more than 255 letters!',
-            'email.required_if'=> 'Email field is required when Role is not Driver or Conductor!',
+            'email.required'=> 'Email field cannot be empty!',
             'email.email' => 'Please enter a valid email address!',
             'email.unique' => 'Entered email is already in use!',
-            'password.required_if'=> 'Email field is required when Role is not Driver or Conductor!',
+            'password.required_if'=> 'Password field is required when Role is not Driver or Conductor!',
             'password.min' => 'Password must contain more than 5 characters!',
         ];
 
@@ -68,7 +96,7 @@ class UserRepository{
 
     //AJAX validation
     private function ajaxVlidation(Request $request){
-        return $this->validate($request)->messages();
+        return $this->validate($request);
     }
 
     //get single user

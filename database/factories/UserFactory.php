@@ -20,6 +20,7 @@ class UserFactory extends Factory
         return [
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),
+            'email' => fake()->email(),
             'role'=> fake()->randomElement(['driver', 'conductor'])
         ];
     }
