@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Expressway\BusController;
+use App\Http\Controllers\Expressway\ReportController;
+use App\Http\Controllers\Expressway\UserController;
+use App\Http\Controllers\HomeController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/account', [HomeController::class, 'index'])->name('home');
 
 Route::get('/owner', function(){
     return view('home');
@@ -37,6 +41,21 @@ Route::get('/data-entry', function(){
 Route::get('/manager', function(){
     return view('home');
 });
+
+Route::get('/users', [UserController::class, 'index'])->middleware('expresswayauth');
+
+Route::post('/user', [UserController::class, 'create']);
+
+Route::get('/user', [UserController::class, 'singleUser']);
+
+Route::delete('/user/{id}', [UserController::class, 'destroy']);
+
+
+Route::get('/reports', [ReportController::class, 'index'])->middleware('expresswayauth');
+
+Route::get('/buses', [BusController::class, 'index'])->middleware('expresswayauth');
+
+Route::get('/routes', [ReportController::class, 'index'])->middleware('expresswayauth');
 
 Route::get('/details', function(){
     $posts = Post::paginate(5, ['*'], 'post');

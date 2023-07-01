@@ -2,10 +2,24 @@
     border: 1px solid red;
 }
 
-.expressway-btn {
+.expressway-btn-medium {
     width: 200px;
     height: 50px;
     font-size: large;
+}
+
+.expressway-btn-small {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expressway-btn-actions {
+    width: 75px;
+    height: 25px;
+    padding: 0%;
 }
 
 .main-container {
@@ -15,4 +29,43 @@
     align-items: center;
     justify-content: space-around;
     justify-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+}
+
+thead tr {
+    font-size: 20px;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+td.actions {
+    width: 200px;
+}
+
+#message-modal .modal-content {
+    height: 300px !important;
+}
+
+.expressway-success {
+    color: rgb(10, 146, 10);
+}
+
+.expressway-error {
+    color: rgb(184, 3, 3);
+}
+
+#edit-modal svg {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
+
+.expressway-hide {
+    display: none;
 }

@@ -34,7 +34,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -45,7 +45,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->first_name }}
+                                    {{ Auth::user()->first_name}} | {{Auth::user()->role }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -60,6 +60,7 @@
                                     </form>
                                 </div>
                             </li>
+                            <a href="/account"><button type="button" class="btn btn-dark expressway-btn-small">Account</button></a>
                         @endguest
                     </ul>
                 </div>
@@ -70,5 +71,8 @@
             @yield('content')
         </main>
     </div>
+    @hasSection('script')
+        @yield('script')
+    @endif
 </body>
 </html>

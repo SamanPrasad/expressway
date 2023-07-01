@@ -10,9 +10,9 @@
     <div class="main-container test">
         <h1 class="text-center">Expressway Transport (Pvt) Ltd</h1>
         @guest
-            <a href="/login"><button type="button" class="btn btn-primary expressway-btn">Login</button></a>
+            <a href="/login"><button type="button" class="btn btn-primary expressway-btn-medium">Login</button></a>
         @else
-            <a href="/home"><button type="button" class="btn btn-primary expressway-btn">Account</button></a>
+            <a href="/account"><button type="button" class="btn btn-primary expressway-btn-medium">Account</button></a>
         @endguest
     </div>    
 </body>
