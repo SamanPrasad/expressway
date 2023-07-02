@@ -72,7 +72,8 @@
 
         <!-- Buses List -->
         <div class="row justify-content-center">
-            <div class="col-sm-9">
+            <h2 class="text-center">Current Buses List</h2>
+            <div class="col-sm-9 mt-5">
                 <table>
                     <thead>
                         <tr>

@@ -5,7 +5,7 @@
         <h1 class="text-center">Manage Users</h1>
         @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Admin')
             <!-- User registration form -->
-            <div class="d-flex justify-content-center pt-3">
+            <div class="d-flex justify-content-center pt-4">
                 <form action="/user" method="post">
                     @csrf
                     <table>
@@ -105,7 +105,8 @@
         @endif
         <!-- Users List -->
         <div class="mt-5">
-            <table>
+            <h2 class="text-center">Current Users List</h2>
+            <table class="mt-5">
                 <thead>
                     <tr>
                         <td>First Name</td>

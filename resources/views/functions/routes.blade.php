@@ -5,7 +5,7 @@
         <h1 class="text-center">Manage Routes</h1>
         @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Data Entry')
             <!-- Routes registration form -->
-            <div class="d-flex justify-content-center pt-3">
+            <div class="d-flex justify-content-center pt-4">
                 <form action="/bus-route" method="post">
                     @csrf
                     <table>
@@ -71,7 +71,8 @@
         @endif
         <!-- Routes List -->
         <div class="mt-5">
-            <table>
+            <h2 class="text-center">Current Bus Routes List</h2>
+            <table class="mt-5">
                 <thead>
                     <tr>
                         <td>Route Number</td>

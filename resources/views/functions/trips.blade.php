@@ -5,11 +5,11 @@
         <h1 class="text-center">Schedule Buses</h1>
         @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Data Entry')
             <!-- Trip Schedule form -->
-            <div class="d-flex justify-content-center pt-3">
+            <div class="d-flex justify-content-center pt-4">
                 <form action="/trip" method="post">
                     @csrf
                     <table>
-                        <h2 class="text-center">Schedule Buses</h2>
+                        <h2 class="text-center">Schedule Bus</h2>
                         <tr>
                             <td class="px-3">
                                 <label for="">Bus ID</label>
@@ -152,7 +152,8 @@
 
         <!-- Schedules List-->
         <div>
-            <table>
+            <h2 class="text-center">Scheduled Buses List</h2>
+            <table class="mt-5">
                 <thead>
                     <tr>
                         <td>Trip ID</td>
