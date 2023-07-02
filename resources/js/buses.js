@@ -84,8 +84,6 @@ function update() {
     body.id = document.getElementById("update-bus-id").value;
     body = JSON.stringify(body);
 
-    console.log(body);
-
     const xhr = new XMLHttpRequest();
     xhr.open("put", "/bus");
     xhr.onreadystatechange = function () {

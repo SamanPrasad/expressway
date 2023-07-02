@@ -124,7 +124,6 @@ function update() {
 
 //Show errors
 function showErrors(response) {
-    console.log(response);
     const error_tds = document.getElementsByClassName("error");
     for (let td of error_tds) {
         td.classList.add("expressway-hide");

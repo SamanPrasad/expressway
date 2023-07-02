@@ -83,7 +83,7 @@
                                 <select name="route-number" id="route-number">
                                     <option value="">Select Route Number</option>
                                     @foreach($routes as $route)
-                                        <option value="{{$route->route_number}}" {{$route->route_number === old('route-number')?'selected':''}}>{{$route->route_number}}</option>
+                                        <option value="{{$route->route_number}}" {{$route->route_number == old('route-number') ? 'selected':''}}>{{$route->route_number}}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -103,7 +103,7 @@
                                 <select name="driver-id" id="driver-id">
                                     <option value="">Select Driver ID</option>
                                     @foreach($drivers as $driver)
-                                        <option value="{{$driver->user_id}}" {{$driver->user_id === old('driver-id')?'selected':''}}>{{$driver->user_id}}</option>
+                                        <option value="{{$driver->user_id}}" {{$driver->user_id == old('driver-id')?'selected':''}}>{{$driver->user_id}}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -123,7 +123,7 @@
                                 <select name="conductor-id" id="conductor-id">
                                     <option value="">Select Conductor ID</option>
                                     @foreach($conductors as $conductor)
-                                        <option value="{{$conductor->user_id}}" {{$conductor->user_id === old('conductor-id')?'selected':''}}>{{$conductor->user_id}}</option>
+                                        <option value="{{$conductor->user_id}}" {{$conductor->user_id == old('conductor-id')?'selected':''}}>{{$conductor->user_id}}</option>
                                     @endforeach
                                 </select>
                             </td>

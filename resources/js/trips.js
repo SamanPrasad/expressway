@@ -62,7 +62,6 @@ function fillSelectionsOfEditModal(response) {
     const driver_id = document.getElementById("update-driver-id");
     const conductor_id = document.getElementById("update-conductor-id");
 
-    console.log(response);
     for (let bus of response.buses) {
         const option = document.createElement("option");
         option.value = bus.registration_number;
@@ -90,15 +89,11 @@ function fillSelectionsOfEditModal(response) {
         option.innerHTML = conductor.user_id;
         conductor_id.appendChild(option);
     }
-
-    console.log(conductor_id);
-    return;
 }
 
 //Fill the edit modal
 function fillEditModal(response) {
     fillSelectionsOfEditModal(response);
-    // return;
 
     const modal = document.getElementById("trips-edit-modal");
     const errors = modal.querySelectorAll(".error");
@@ -138,8 +133,6 @@ function update() {
     body.id = document.getElementById("update-trip-id").value;
     body = JSON.stringify(body);
 
-    console.log(body);
-
     const xhr = new XMLHttpRequest();
     xhr.open("put", "/trip");
     xhr.onreadystatechange = function () {
@@ -173,9 +166,9 @@ function showErrors(response) {
         error_tds[0].innerHTML = response["bus-id"][0];
     }
 
-    if (response["statrt-at"] != null) {
+    if (response["start-at"] != null) {
         error_tds[1].classList.remove("expressway-hide");
-        error_tds[1].innerHTML = response["statrt-at"][0];
+        error_tds[1].innerHTML = response["start-at"][0];
     }
 
     if (response["start-from"] != null) {
