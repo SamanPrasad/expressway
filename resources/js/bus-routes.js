@@ -83,7 +83,7 @@ function update() {
     body = JSON.stringify(body);
 
     const xhr = new XMLHttpRequest();
-    xhr.open("post", "/bus-route/update");
+    xhr.open("put", "/bus-route");
     xhr.onreadystatechange = function () {
         if (this.status == 200 && this.readyState == 4) {
             if (this.responseText == "success") {

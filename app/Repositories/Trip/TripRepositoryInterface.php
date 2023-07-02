@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Repositories\Route;
+namespace App\Repositories\Trip;
 
 use Illuminate\Http\Request;
 
-interface RouteRepositoryInterface{
+interface TripRepositoryInterface{
     public function allWithPagination();
-
-    public function all();
 
     public function add(Request $request);
 
-    public function singleRoute($id);
+    public function delete($id);
+
+    public function singleTrip($id);
 
     public function update(Request $request);
-
-    public function delete($id);
 }

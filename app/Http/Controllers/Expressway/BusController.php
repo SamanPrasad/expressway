@@ -17,7 +17,7 @@ class BusController extends Controller
 
     //get bus view
     public function index(){
-        $buses = $this->busRepository->all();
+        $buses = $this->busRepository->allWithPagination();
         return view('functions.buses')->with('buses', $buses);
     }
 
@@ -38,19 +38,7 @@ class BusController extends Controller
 
     //Delete bus
     public function destroy($id){
-        $bus = $this->busRepository->singleBus($id);
-
-        if(is_null($bus)){
-            return 'error';
-        }
-
-        $result = $bus->delete();
-
-        if($result){
-            return 'success';
-        }
-
-        return 'error';
+        return $this->busRepository->delete($id);
     }
 
     //Get bus details based on id

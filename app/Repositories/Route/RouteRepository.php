@@ -8,8 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class RouteRepository implements RouteRepositoryInterface{
 
-    public function all(){
+    public function allWithPagination(){
         return Route::paginate(5);
+    }
+
+    public function all(){
+        return Route::all();
     }
 
     public function add(Request $request){
@@ -32,7 +36,7 @@ class RouteRepository implements RouteRepositoryInterface{
 
         $validator = $this->ajaxValidation($request);
 
-        if($validator->messages()->first('route-number') || $validator->messages()->first('from') || $validator->messages()->first('to')){
+        if($validator->fails()){
             return $validator->messages();
         }
 
@@ -80,8 +84,14 @@ class RouteRepository implements RouteRepositoryInterface{
         return Route::find($id);
     }
 
+    //Delete user
     public function delete($id){
         $route = $this->singleRoute($id);
+        if(is_null($route)){
+            return 'error';
+        }
+
+        $route->trips()->delete();
 
         $result = $route->delete();
         if($result){

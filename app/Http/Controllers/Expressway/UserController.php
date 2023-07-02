@@ -20,7 +20,7 @@ class UserController extends Controller
 
     //get users view
     public function index(){
-        $users = $this->userRepository->all();
+        $users = $this->userRepository->allWithPagination();
         return view('functions.users')->with('users', $users)->with('roles', $this->roles);
     }
 
@@ -46,17 +46,6 @@ class UserController extends Controller
 
     //delete user
     public function destroy($id){
-        $user = $this->userRepository->singleUser($id);
-        if(is_null($user)){
-            return "error";
-        }
-
-        $result = $user->delete();
-
-        if($result){
-            return 'success';
-        }
-
-        return 'error';
+        return $this->userRepository->delete($id);        
     }
 }

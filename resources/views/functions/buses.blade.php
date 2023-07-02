@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h1 class="text-center">Manage Buses</h1>
-        @if(auth()->user()->role != 'Manager')
+        @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Data Entry')
             <!-- Bus registration form -->
             <div class="d-flex justify-content-center pt-3">
                 <form action="/bus" method="post">
@@ -79,7 +79,7 @@
                             <td>Registration Number</td>
                             <td>Type</td>
                             <td>Capacity</td>
-                            @if(auth()->user()->role != 'Manager')
+                            @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Data Entry')
                                 <td class="actions">Actions</td>
                             @endif
                         </tr>
@@ -90,7 +90,7 @@
                                 <td>{{$bus->registration_number}}</td>
                                 <td>{{$bus->type}}</td>
                                 <td>{{$bus->capacity}}</td>
-                                @if(auth()->user()->role != 'Manager')
+                                @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Data Entry')
                                     <td>
                                         <button data-id="{{$bus->id}}" type="button" class="btn btn-primary expressway-btn-actions edit">Edit</button>
                                         <button data-id="{{$bus->id}}" type="button" class="btn btn-warning expressway-btn-actions delete">Delete</button>
@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        @if(auth()->user()->role != 'Manager')
+        @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Data Entry')
             <!-- Button to trigger edit modal -->
             <button id="buses-edit-modal-trigger" type="button" data-bs-toggle="modal" data-bs-target="#buses-edit-modal" hidden></button>
             
@@ -187,7 +187,7 @@
     </div>
 @endsection
 
-@if(auth()->user()->role != 'Manager')
+@if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Data Entry')
     @section('script')
         @vite(['resources/js/buses.js'])
     @endsection

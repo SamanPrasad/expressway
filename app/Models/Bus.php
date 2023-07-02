@@ -14,4 +14,8 @@ class Bus extends Model
         'type',
         'capacity',
     ];
+
+    public function trips(){
+        return $this->hasMany(Trip::class, 'bus_number', 'registration_number');
+    }
 }

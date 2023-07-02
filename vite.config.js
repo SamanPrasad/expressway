@@ -11,6 +11,7 @@ export default defineConfig({
                 "resources/js/users.js",
                 "resources/js/buses.js",
                 "resources/js/bus-routes.js",
+                "resources/js/trips.js",
             ],
             refresh: true,
         }),

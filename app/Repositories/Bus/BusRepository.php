@@ -8,9 +8,14 @@ use Illuminate\Support\Facades\Validator;
 
 class BusRepository implements BusRepositoryInterface{
 
-    //get all buses
-    public function all(){
+    //get all buses with pagination
+    public function allWithPagination(){
         return Bus::paginate(5);
+    }
+
+    //Get all buses
+    public function all(){
+        return Bus::all();
     }
 
     //validate input
@@ -67,7 +72,7 @@ class BusRepository implements BusRepositoryInterface{
 
         $validator = $this->ajaxValidation($request);
 
-        if($validator->messages()->first('registration-number') || $validator->messages()->first('type') || $validator->messages()->first('capacity')){
+        if($validator->fails()){
             return $validator->messages();
         }
 
@@ -86,5 +91,23 @@ class BusRepository implements BusRepositoryInterface{
     //Get single bus based on id
     public function singleBus($id){
         return Bus::find($id);
+    }
+
+    //Delete bus
+    public function delete($id){
+        $bus = $this->singleBus($id);
+        if(is_null($bus)){
+            return 'error';
+        }
+
+        $bus->trips()->delete();
+
+        $result = $bus->delete();
+
+        if($result){
+            return 'success';
+        }
+
+        return 'error';
     }
 }

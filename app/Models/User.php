@@ -47,4 +47,12 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    public function driverTrips(){
+        return $this->hasMany(Trip::class, 'driver_id', 'user_id');
+    }
+
+    public function conductorTrips(){
+        return $this->hasMany(Trip::class, 'conductor_id', 'user_id');
+    }
 }

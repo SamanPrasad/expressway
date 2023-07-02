@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RouteSeeder::class);
 
+        $this->call(TripSeeder::class);
+
         User::factory(20)->create();
 
         Bus::factory(20)->create();

@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Validator;
 
 class UserRepository implements UserRepositoryInterface{
 
+    //get all users with pagination
+    public function allWithPagination(){
+        return $users = User::paginate(5);
+    }
+
     //get all users
     public function all(){
-        return $users = User::paginate(5);
+        return User::all();
     }
 
     //Create user
@@ -95,5 +100,29 @@ class UserRepository implements UserRepositoryInterface{
     //get single user
     public function singleUser($id){
         return User::find($id);
+    }
+
+    //Delete useer
+    public function delete($id){
+        $user = User::find($id);
+        if(is_null($user)){
+            return "error";
+        }
+
+        $user->driverTrips()->delete();
+        $user->conductorTrips()->delete();
+
+        $result = $user->delete();
+
+        if($result){
+            return 'success';
+        }
+
+        return 'error';
+    }
+
+    //User based on the role
+    public function userWithRole($role){
+        return User::where('role',$role)->get();
     }
 }

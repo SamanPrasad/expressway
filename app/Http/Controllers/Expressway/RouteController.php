@@ -16,7 +16,7 @@ class RouteController extends Controller
     }
 
     public function index(){
-        $routes = $this->routeRepository->all();
+        $routes = $this->routeRepository->allWithPagination();
         return view('functions.routes')->with('routes', $routes);
     }
 
@@ -43,7 +43,5 @@ class RouteController extends Controller
     //Get single route based on id
     public function singleRoute(Request $request){
         return $this->routeRepository->singleRoute($request->input('id'));
-        // dd($this->routeRepository->singleRoute($request->input('id')));
-
     }
 }

@@ -6,6 +6,8 @@ use App\Repositories\Bus\BusRepository;
 use App\Repositories\Bus\BusRepositoryInterface;
 use App\Repositories\Route\RouteRepository;
 use App\Repositories\Route\RouteRepositoryInterface;
+use App\Repositories\Trip\TripRepository;
+use App\Repositories\Trip\TripRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(BusRepositoryInterface::class, BusRepository::class);
 
         $this->app->bind(RouteRepositoryInterface::class, RouteRepository::class);
+
+        $this->app->bind(TripRepositoryInterface::class, TripRepository::class);
     }
 
     /**

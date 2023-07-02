@@ -15,4 +15,8 @@ class Route extends Model
         'from',
         'to'
     ];
+
+    public function trips(){
+        return $this->hasMany(Trip::class, 'route_number', 'route_number');
+    }
 }

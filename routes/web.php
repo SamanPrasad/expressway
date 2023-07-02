@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Expressway\BusController;
 use App\Http\Controllers\Expressway\RouteController;
+use App\Http\Controllers\Expressway\TripController;
 use App\Http\Controllers\Expressway\UserController;
 use App\Http\Controllers\HomeController;
 use App\Models\Post;
@@ -49,7 +50,7 @@ Route::post('/user', [UserController::class, 'create']);
 
 Route::get('/user', [UserController::class, 'singleUser']);
 
-Route::post('/user/update', [UserController::class, 'update']);
+Route::put('/user', [UserController::class, 'update']);
 
 Route::delete('/user/{id}', [UserController::class, 'destroy']);
 /************************/
@@ -61,7 +62,7 @@ Route::post('/bus', [BusController::class, 'create']);
 
 Route::get('/bus',[BusController::class, 'singleBus']);
 
-Route::post('/bus/update',[BusController::class, 'update']);
+Route::put('/bus',[BusController::class, 'update']);
 
 Route::delete('bus/{id}', [BusController::class, 'destroy']);
 /********************/
@@ -73,9 +74,21 @@ Route::post('/bus-route', [RouteController::class, 'create']);
 
 Route::get('/bus-route', [RouteController::class, 'singleRoute']);
 
-Route::post('/bus-route/update', [RouteController::class, 'update']);
+Route::put('/bus-route', [RouteController::class, 'update']);
 
 Route::delete('/bus-route/{id}', [RouteController::class, 'destroy']);
+/******************/
+
+/***Trips routes*****/
+Route::get('/trips', [TripController::class, 'index']);
+
+Route::get('/trip', [TripController::class, 'singleTrip']);
+
+Route::post('/trip', [TripController::class, 'create']);
+
+Route::put('/trip', [TripController::class, 'update']);
+
+Route::delete('/trip/{id}',[TripController::class, 'destroy']);
 
 
 

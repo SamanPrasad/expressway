@@ -222,7 +222,7 @@
     </div>
 @endsection
 
-@if(auth()->user()->role != 'Manager')
+@if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Admin')
     @section('script')
         @vite(['resources/js/users.js'])
     @endsection
