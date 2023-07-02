@@ -13,7 +13,7 @@ class RouteRepository implements RouteRepositoryInterface{
     }
 
     public function all(){
-        return Route::all();
+        return Route::orderBy('route_number')->get();
     }
 
     public function add(Request $request){

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -46,6 +47,10 @@ class UserController extends Controller
 
     //delete user
     public function destroy($id){
-        return $this->userRepository->delete($id);        
+        if(Auth::check()){
+            return $this->userRepository->delete($id);        
+        }
+
+        return redirect('/');
     }
 }

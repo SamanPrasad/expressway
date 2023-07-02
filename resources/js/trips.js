@@ -62,6 +62,7 @@ function fillSelectionsOfEditModal(response) {
     const driver_id = document.getElementById("update-driver-id");
     const conductor_id = document.getElementById("update-conductor-id");
 
+    console.log(response);
     for (let bus of response.buses) {
         const option = document.createElement("option");
         option.value = bus.registration_number;
@@ -119,7 +120,7 @@ function fillEditModal(response) {
     document.getElementById("update-driver-id").value = response.trip.driver_id;
     document.getElementById("update-conductor-id").value =
         response.trip.conductor_id;
-    document.getElementById("update-trip-id").value = response.trip.id;
+    document.getElementById("update-trip-id").value = response.trip.trip_id;
 
     document.getElementById("trips-edit-modal-trigger").click();
 }
@@ -188,8 +189,18 @@ function showErrors(response) {
     }
 
     if (response["route-number"] != null) {
-        error_tds[3].classList.remove("expressway-hide");
-        error_tds[3].innerHTML = response["route-number"][0];
+        error_tds[4].classList.remove("expressway-hide");
+        error_tds[4].innerHTML = response["route-number"][0];
+    }
+
+    if (response["driver-id"] != null) {
+        error_tds[5].classList.remove("expressway-hide");
+        error_tds[5].innerHTML = response["driver-id"][0];
+    }
+
+    if (response["conductor-id"] != null) {
+        error_tds[6].classList.remove("expressway-hide");
+        error_tds[6].innerHTML = response["conductor-id"][0];
     }
 }
 

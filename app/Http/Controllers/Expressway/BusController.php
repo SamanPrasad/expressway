@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Expressway;
 use App\Http\Controllers\Controller;
 use App\Repositories\Bus\BusRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BusController extends Controller
 {
@@ -38,7 +39,11 @@ class BusController extends Controller
 
     //Delete bus
     public function destroy($id){
-        return $this->busRepository->delete($id);
+        if(Auth::check()){
+            return $this->busRepository->delete($id);
+        }
+
+        return redirect('/');
     }
 
     //Get bus details based on id

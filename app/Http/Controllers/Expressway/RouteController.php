@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Expressway;
 use App\Http\Controllers\Controller;
 use App\Repositories\Route\RouteRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RouteController extends Controller
 {
@@ -37,7 +38,11 @@ class RouteController extends Controller
 
     //Delete route
     public function destroy($id){
-        return $this->routeRepository->delete($id);
+        if(Auth::check()){
+            return $this->routeRepository->delete($id);
+        }
+
+        return redirect('/');
     }
 
     //Get single route based on id

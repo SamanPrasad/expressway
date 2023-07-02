@@ -8,6 +8,7 @@ use App\Repositories\Route\RouteRepositoryInterface;
 use App\Repositories\Trip\TripRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
 {
@@ -55,7 +56,11 @@ class TripController extends Controller
 
     //Delete trip
     public function destroy($id){
-        return $this->tripRepository->delete($id);
+        if(Auth::check()){
+            return $this->tripRepository->delete($id);
+        }
+
+        return redirect('/');
     }
 
     //Get trip based on id
