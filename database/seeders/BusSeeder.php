@@ -15,18 +15,18 @@ class BusSeeder extends Seeder
     {
         $buses = [
             [
-                'registration_number'=>'SP-23445',
-                'type'=>'A/C',
+                'registration_number'=>'SP23445',
+                'type'=>'ac',
                 'capacity'=>50
             ],
             [
-                'registration_number'=>'SP-28545',
-                'type'=>'Normal',
+                'registration_number'=>'SP28545',
+                'type'=>'normal',
                 'capacity'=>40
             ],
             [
-                'registration_number'=>'WP-23445',
-                'type'=>'A/C',
+                'registration_number'=>'WP23445',
+                'type'=>'ac',
                 'capacity'=>25
             ],
         ];

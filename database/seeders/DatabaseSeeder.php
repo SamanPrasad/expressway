@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Bus;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +26,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BusSeeder::class);
 
+        $this->call(RouteSeeder::class);
+
         User::factory(20)->create();
+
+        Bus::factory(20)->create();
     }
 }

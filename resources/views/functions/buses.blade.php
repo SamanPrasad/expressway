@@ -1,28 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container pb-5">
-        <h1 class="text-center">Manage Users</h1>
-        @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Admin')
-            <!-- User registration form -->
+    <div class="container">
+        <h1 class="text-center">Manage Buses</h1>
+        @if(auth()->user()->role != 'Manager')
+            <!-- Bus registration form -->
             <div class="d-flex justify-content-center pt-3">
-                <form action="/user" method="post">
+                <form action="/bus" method="post">
                     @csrf
                     <table>
-                        <h2 class="text-center">Add User</h2>
+                        <h2 class="text-center">Add Bus</h2>
                         <tr>
                             <td class="px-3">
-                                <label for="">Role</label>
+                                <label for="">Registration Number</label>
                             </td>
                             <td class="px-3">
-                                <select name="role" id="role">
-                                    @foreach($roles as $role)
-                                        <option value="{{$role}}" {{$role === old('role')?'selected':''}}>{{$role}}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="registration-number" id="registration-number" value="{{old('registration-number')}}">
                             </td>
                         </tr>
-                        @error('role')
+                        @error('registration-number')
                             <tr>
                                 <td colspan="2" class="text-center expressway-error py-2">
                                     {{$message}}
@@ -31,13 +27,13 @@
                         @enderror
                         <tr>
                             <td class="px-3">
-                                <label for="">First Name</label>
+                                <label for="">Type</label>
                             </td>
                             <td class="px-3">
-                                <input type="text" name="fname" id="fname" value="{{old('fname')}}">
+                                <input type="text" name="type" id="type" value="{{old('type')}}">
                             </td>
                         </tr>
-                        @error('fname')
+                        @error('type')
                             <tr>
                                 <td colspan="2" class="text-center expressway-error py-2">
                                     {{$message}}
@@ -46,43 +42,13 @@
                         @enderror
                         <tr>
                             <td class="px-3">
-                                <label for="">Last Name</label>
+                                <label for="">Capacity</label>
                             </td>
                             <td class="px-3">
-                                <input type="text" name="lname" id="lname" value="{{old('lname')}}">
+                                <input type="text" name="capacity" id="capacity" value="{{old('capacity')}}">
                             </td>
                         </tr>
-                        @error('lname')
-                            <tr>
-                                <td colspan="2" class="text-center expressway-error py-2">
-                                    {{$message}}
-                                </td>
-                            </tr>
-                        @enderror
-                        <tr>
-                            <td class="px-3">
-                                <label for="">E-mail</label>
-                            </td>
-                            <td class="px-3">
-                                <input type="text" name="email" id="email" value="{{old('email')}}" {{old('role')==='Conductor' || old('role') === 'Driver'?'disabled':''}}>
-                            </td>
-                        </tr>
-                        @error('email')
-                            <tr>
-                                <td colspan="2" class="text-center expressway-error py-2">
-                                    {{$message}}
-                                </td>
-                            </tr>
-                        @enderror
-                        <tr>
-                            <td class="px-3">
-                                <label for="">Password</label>
-                            </td>
-                            <td class="px-3">
-                                <input type="password" name="password" id="password" value="{{old('password')}}" {{old('role')==='Conductor' || old('role') === 'Driver'?'disabled':''}}>
-                            </td>
-                        </tr>
-                        @error('password')
+                        @error('capacity')
                             <tr>
                                 <td colspan="2" class="text-center expressway-error py-2">
                                     {{$message}}
@@ -103,50 +69,49 @@
             @endif
             <hr class="my-5">
         @endif
-        <!-- Users List -->
-        <div class="mt-5">
-            <table>
-                <thead>
-                    <tr>
-                        <td>First Name</td>
-                        <td>Last Name</td>
-                        <td>Email</td>
-                        <td>Role</td>
-                        @if(auth()->user()->role != 'Manager')
-                            <td class="actions">Actions</td>
-                        @endif
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($users as $user)
+
+        <!-- Buses List -->
+        <div class="row justify-content-center">
+            <div class="col-sm-9">
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{$user->first_name}}</td>
-                            <td>{{$user->last_name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->role}}</td>
-                            @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Admin')
-                                @if(!($user->role === 'Owner' && auth()->user()->role === 'Admin'))
-                                    <td>
-                                        <button data-id="{{$user->user_id}}" type="button" class="btn btn-primary expressway-btn-actions edit">Edit</button>
-                                        <button data-id="{{$user->user_id}}" type="button" class="btn btn-warning expressway-btn-actions delete">Delete</button>
-                                    </td>
-                                @endif
+                            <td>Registration Number</td>
+                            <td>Type</td>
+                            <td>Capacity</td>
+                            @if(auth()->user()->role != 'Manager')
+                                <td class="actions">Actions</td>
                             @endif
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <div class="d-flex justify-content-center mt-3">
-                {{$users->links()}}
-            </div>            
+                    </thead>
+                    <tbody>
+                        @foreach($buses as $bus)
+                            <tr>
+                                <td>{{$bus->registration_number}}</td>
+                                <td>{{$bus->type}}</td>
+                                <td>{{$bus->capacity}}</td>
+                                @if(auth()->user()->role != 'Manager')
+                                    <td>
+                                        <button data-id="{{$bus->id}}" type="button" class="btn btn-primary expressway-btn-actions edit">Edit</button>
+                                        <button data-id="{{$bus->id}}" type="button" class="btn btn-warning expressway-btn-actions delete">Delete</button>
+                                    </td>
+                                @endif
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center mt-3">
+                    {{$buses->links()}}
+                </div>            
+            </div>
         </div>
 
-        @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Admin')
+        @if(auth()->user()->role != 'Manager')
             <!-- Button to trigger edit modal -->
-            <button id="edit-modal-trigger" type="button" data-bs-toggle="modal" data-bs-target="#edit-modal" hidden></button>
+            <button id="buses-edit-modal-trigger" type="button" data-bs-toggle="modal" data-bs-target="#buses-edit-modal" hidden></button>
             
             <!-- Edit Modal -->
-            <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="buses-edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content d-flex justify-content-center">
                         <div class="d-flex flex-column justify-content-center align-items-center py-4">
@@ -155,15 +120,15 @@
                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                             </svg>
                             <div>       
-                                <input type="text" id="update-user-id" hidden>                     
+                                <input type="text" id="update-bus-id" hidden>                     
                                 <table>
-                                    <h2 class="text-center">Update User</h2>
+                                    <h2 class="text-center">Update Bus</h2>
                                     <tr>
                                         <td class="px-3">
-                                            <label for="">First Name</label>
+                                            <label for="">Registration Nuber</label>
                                         </td>
                                         <td class="px-3">
-                                            <input type="text" id="update-fname">
+                                            <input type="text" id="update-registration-number">
                                         </td>
                                     </tr>
                                     <tr>
@@ -172,10 +137,10 @@
                                     </tr>
                                     <tr>
                                         <td class="px-3">
-                                            <label for="">Last Name</label>
+                                            <label for="">Type</label>
                                         </td>
                                         <td class="px-3">
-                                            <input type="text" id="update-lname">
+                                            <input type="text" id="update-type">
                                         </td>
                                     </tr>
                                     <tr>
@@ -184,10 +149,10 @@
                                     </tr>
                                     <tr>
                                         <td class="px-3">
-                                            <label for="">E-mail</label>
+                                            <label for="">Capacity</label>
                                         </td>
                                         <td class="px-3">
-                                            <input type="text" id="update-email">
+                                            <input type="text" id="update-capacity">
                                         </td>
                                     </tr>
                                     <tr>
@@ -224,6 +189,6 @@
 
 @if(auth()->user()->role != 'Manager')
     @section('script')
-        @vite(['resources/js/users.js'])
+        @vite(['resources/js/buses.js'])
     @endsection
 @endif

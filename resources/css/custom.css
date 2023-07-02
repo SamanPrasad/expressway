@@ -48,7 +48,7 @@ td.actions {
     width: 200px;
 }
 
-#message-modal .modal-content {
+.message-modal .modal-content {
     height: 300px !important;
 }
 
@@ -60,7 +60,8 @@ td.actions {
     color: rgb(184, 3, 3);
 }
 
-#edit-modal svg {
+#edit-modal svg,
+#buses-edit-modal svg {
     position: absolute;
     right: 30px;
     top: 30px;

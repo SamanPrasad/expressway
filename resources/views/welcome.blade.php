@@ -7,7 +7,7 @@
     <title>Expressway Transport (Pvt) Ltd</title>
 </head>
 <body>
-    <div class="main-container test">
+    <div class="main-container">
         <h1 class="text-center">Expressway Transport (Pvt) Ltd</h1>
         @guest
             <a href="/login"><button type="button" class="btn btn-primary expressway-btn-medium">Login</button></a>

@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
                 'first_name'=>'Clark',
                 'last_name'=>'Kent',
                 'email'=>'clark@gmail.com',
-                'password'=>'barry',
+                'password'=>'clark',
                 'role'=>'Owner'
             ],
             [

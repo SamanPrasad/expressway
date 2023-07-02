@@ -26,6 +26,12 @@ class ExpresswayAuth
         }elseif($request->is('trips') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner'  && auth()->user()->role !== 'Manager')){
             return redirect('/');
         }
+
+        // $input = $request->all();
+        // if(array_key_exists('email', $input)){
+        //     $input['email'] = strtolower($input['email']);
+        //     $request->replace($input);
+        // }
         return $next($request);
     }
 }

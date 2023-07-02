@@ -36,11 +36,7 @@ class UserController extends Controller
 
     //get signle user details
     public function singleUser(Request $request){
-        $user = $this->userRepository->user($request->input('id'));
-        return [
-            'user'=>$user,
-            'roles'=>$this->roles
-        ];
+        return $this->userRepository->singleUser($request->input('id'));
     }
 
     //Update user
@@ -50,7 +46,7 @@ class UserController extends Controller
 
     //delete user
     public function destroy($id){
-        $user = $this->userRepository->user($id);
+        $user = $this->userRepository->singleUser($id);
         if(is_null($user)){
             return "error";
         }

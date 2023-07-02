@@ -11,5 +11,5 @@ interface UserRepositoryInterface{
 
     public function update(Request $request);
 
-    public function user($id);
+    public function singleUser($id);
 }

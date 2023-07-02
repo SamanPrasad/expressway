@@ -18,10 +18,10 @@ class UserRepository implements UserRepositoryInterface{
     public function add(Request $request){
         $this->regularValidation($request);
         $details = [
-            'first_name'=>$request->fname,
-            'last_name'=>$request->lname,
+            'first_name'=>ucfirst($request->fname),
+            'last_name'=>ucfirst($request->lname),
             'role'=>$request->role,
-            'email'=>$request->email,
+            'email'=>strtolower($request->email),
             'password'=>$request->password,
         ];
 
@@ -30,22 +30,20 @@ class UserRepository implements UserRepositoryInterface{
 
     //Update user
     public function update(Request $request){
-        $user  = User::find($request->user_id);
+        $user  = $this->singleUser($request->user_id);
         if(is_null($user)){
             return 'error';
         }
 
         $validator = $this->ajaxVlidation($request);
-        $msg_count = count($validator->messages());
 
-        if($msg_count > 1){
+        if($validator->messages()->first('fname') || $validator->messages()->first('lname') || $validator->messages()->first('email')){
             return $validator->messages();
         }
 
-        $user->first_name = $request->fname;
-        $user->last_name = $request->lname;
-        $user->email = $request->email;
-        $user->role = $request->role;
+        $user->first_name = ucfirst($request->fname);
+        $user->last_name = ucfirst($request->lname);
+        $user->email = strtolower($request->email);
         $result = $user->save();
 
         if($result){
@@ -81,11 +79,6 @@ class UserRepository implements UserRepositoryInterface{
         ];
 
         return Validator::make($request->all(), $rules, $messages);
-        // $validation->validate();
-
-        // if($validation->fails()){
-        //     dd($validation->messages());
-        // }
     }
 
     //Regular validation
@@ -100,7 +93,7 @@ class UserRepository implements UserRepositoryInterface{
     }
 
     //get single user
-    public function user($id){
+    public function singleUser($id){
         return User::find($id);
     }
 }

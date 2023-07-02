@@ -56,6 +56,14 @@ Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
 Route::get('/buses', [BusController::class, 'index'])->middleware('expresswayauth');
 
+Route::post('/bus', [BusController::class, 'create']);
+
+Route::get('/bus',[BusController::class, 'singleBus']);
+
+Route::post('/bus/update',[BusController::class, 'update']);
+
+Route::delete('bus/{id}', [BusController::class, 'destroy']);
+
 Route::get('/routes', [RouteController::class, 'index'])->middleware('expresswayauth');
 
 
