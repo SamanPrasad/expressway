@@ -21,17 +21,12 @@ class ExpresswayAuth
                 return redirect('/');
         }elseif($request->is('buses') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner' && auth()->user()->role !== 'Manager')){
             return redirect('/');
-        }elseif($request->is('routes') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner'  && auth()->user()->role !== 'Manager')){
+        }elseif($request->is('bus-routes') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner'  && auth()->user()->role !== 'Manager')){
             return redirect('/');
         }elseif($request->is('trips') && (auth()->user()->role !== 'Data Entry' && auth()->user()->role !== 'Owner'  && auth()->user()->role !== 'Manager')){
             return redirect('/');
         }
 
-        // $input = $request->all();
-        // if(array_key_exists('email', $input)){
-        //     $input['email'] = strtolower($input['email']);
-        //     $request->replace($input);
-        // }
         return $next($request);
     }
 }

@@ -9,8 +9,9 @@ class Route extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
-        'route_id',
+        'route_number',
         'from',
         'to'
     ];

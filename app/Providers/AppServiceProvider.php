@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Bus\BusRepository;
 use App\Repositories\Bus\BusRepositoryInterface;
+use App\Repositories\Route\RouteRepository;
+use App\Repositories\Route\RouteRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
 
         $this->app->bind(BusRepositoryInterface::class, BusRepository::class);
+
+        $this->app->bind(RouteRepositoryInterface::class, RouteRepository::class);
     }
 
     /**

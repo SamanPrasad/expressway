@@ -11,7 +11,7 @@
                 <a href="/buses"><button type="button" class="btn btn-info expressway-btn-medium my-2">Manage Buses</button></a>
             @endif
             @if(in_array(Auth::user()->role, ['Owner', 'Data Entry', 'Manager']))
-                <a href="/routes"><button type="button" class="btn btn-info expressway-btn-medium my-2">Manage Routes</button></a>
+                <a href="/bus-routes"><button type="button" class="btn btn-info expressway-btn-medium my-2">Manage Routes</button></a>
             @endif
             @if(in_array(Auth::user()->role, ['Owner', 'Data Entry', 'Manager']))
                 <a href="/trips"><button type="button" class="btn btn-info expressway-btn-medium my-2">Schedule Buses</button></a>

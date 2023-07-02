@@ -170,7 +170,7 @@
             </div>
 
             <!-- Button to trigger message modal -->
-            <button id="message-modal-trigger" class="message-modal-trigger" type="button" data-bs-toggle="modal" data-bs-target="#message-modal" hidden></button>
+            <button class="message-modal-trigger" type="button" data-bs-toggle="modal" data-bs-target="#message-modal" hidden></button>
 
             <!-- Message Modal -->
             <div class="modal fade message-modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

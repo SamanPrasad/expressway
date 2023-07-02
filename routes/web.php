@@ -54,6 +54,7 @@ Route::post('/user/update', [UserController::class, 'update']);
 Route::delete('/user/{id}', [UserController::class, 'destroy']);
 /************************/
 
+/*****Bus routes******/
 Route::get('/buses', [BusController::class, 'index'])->middleware('expresswayauth');
 
 Route::post('/bus', [BusController::class, 'create']);
@@ -63,7 +64,18 @@ Route::get('/bus',[BusController::class, 'singleBus']);
 Route::post('/bus/update',[BusController::class, 'update']);
 
 Route::delete('bus/{id}', [BusController::class, 'destroy']);
+/********************/
 
-Route::get('/routes', [RouteController::class, 'index'])->middleware('expresswayauth');
+/********Routes routes***********/
+Route::get('/bus-routes', [RouteController::class, 'index'])->middleware('expresswayauth');
+
+Route::post('/bus-route', [RouteController::class, 'create']);
+
+Route::get('/bus-route', [RouteController::class, 'singleRoute']);
+
+Route::post('/bus-route/update', [RouteController::class, 'update']);
+
+Route::delete('/bus-route/{id}', [RouteController::class, 'destroy']);
+
 
 

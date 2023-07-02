@@ -15,7 +15,7 @@ class RouteSeeder extends Seeder
     {
         $routes = [
             [
-                'route_number'=>'413/2',
+                'route_number'=>'13',
                 'from'=> 'Galle',
                 'to'=>'Matara'
             ],

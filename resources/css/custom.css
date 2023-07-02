@@ -61,7 +61,8 @@ td.actions {
 }
 
 #edit-modal svg,
-#buses-edit-modal svg {
+#buses-edit-modal svg,
+#routes-edit-modal svg {
     position: absolute;
     right: 30px;
     top: 30px;

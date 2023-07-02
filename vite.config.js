@@ -10,6 +10,7 @@ export default defineConfig({
                 "resources/js/app.js",
                 "resources/js/users.js",
                 "resources/js/buses.js",
+                "resources/js/bus-routes.js",
             ],
             refresh: true,
         }),

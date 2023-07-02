@@ -64,7 +64,7 @@
                                 <label for="">E-mail</label>
                             </td>
                             <td class="px-3">
-                                <input type="text" name="email" id="email" value="{{old('email')}}" {{old('role')==='Conductor' || old('role') === 'Driver'?'disabled':''}}>
+                                <input type="text" name="email" id="email" value="{{old('email')}}">
                             </td>
                         </tr>
                         @error('email')
@@ -112,7 +112,7 @@
                         <td>Last Name</td>
                         <td>Email</td>
                         <td>Role</td>
-                        @if(auth()->user()->role != 'Manager')
+                        @if(auth()->user()->role === 'Owner' || auth()->user()->role === 'Admin')
                             <td class="actions">Actions</td>
                         @endif
                     </tr>
@@ -205,7 +205,7 @@
             </div>
 
             <!-- Button to trigger message modal -->
-            <button id="message-modal-trigger" class="message-modal-trigger" type="button" data-bs-toggle="modal" data-bs-target="#message-modal" hidden></button>
+            <button class="message-modal-trigger" type="button" data-bs-toggle="modal" data-bs-target="#message-modal" hidden></button>
 
             <!-- Message Modal -->
             <div class="modal fade message-modal" id="message-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
